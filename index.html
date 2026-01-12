@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo de Tabuleiro</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- MENU -->
+  <div id="menu" class="tela ativa">
+    <h1>🎲 Jogo de Tabuleiro</h1>
+    <p>Um jogo educativo com perguntas e desafios!</p>
+    <div class="menu-botoes">
+      <button onclick="abrirModalJogadores()">
+        <i class="fas fa-play"></i> Jogar
+      </button>
+      <button onclick="sair()">
+        <i class="fas fa-sign-out-alt"></i> Sair
+      </button>
+    </div>
+  </div>
+<!-- MODAL JOGADORES -->
+<div id="modal-jogadores" class="modal">
+  <div class="modal-box">
+    <h2><i class="fas fa-flask"></i> Configurar Jogo</h2>
+
+    <p class="descricao">Escolha o número de jogadores e defina seus nomes.</p>
+
+    <label for="qtdJogadores"><i class="fas fa-users"></i> Quantidade de Jogadores:</label>
+    <select id="qtdJogadores" onchange="criarInputs()">
+      <option value="2">2 Jogadores</option>
+      <option value="3">3 Jogadores</option>
+      <option value="4">4 Jogadores</option>
+    </select>
+
+    <div id="inputs-nomes" class="inputs-nomes"></div>
+
+    <div class="botoes-modal">
+      <button class="btn iniciar" onclick="iniciarJogo()">
+        <i class="fas fa-dice"></i> Iniciar Jogo
+      </button>
+      <button class="btn voltar" onclick="fecharModal('modal-jogadores')">
+        <i class="fas fa-arrow-left"></i> Voltar
+      </button>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+
+<!-- MODAL TABULEIRO -->
+<div id="modal-tabuleiro" class="modal">
+  <div class="modal-box tabuleiro">
+    <!-- Estrutura com sidebar e conteúdo principal -->
+    <div class="tabuleiro-layout">
+      
+      <!-- SIDEBAR LATERAL COM CONTROLES -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h2><i class="fas fa-gamepad"></i> Controles</h2>
+        </div>
+        
+        <!-- INFORMAÇÕES DO TURNO -->
+        <div class="info-turno">
+          <div class="turno-jogador">
+            <h3><i class="fas fa-user-circle"></i> Vez de:</h3>
+            <div class="jogador-atual" id="jogador-atual-nome">-</div>
+          </div>
+
+        </div>
+        
+        <!-- BOTÃO ROLAR DADO -->
+        <div class="dado-container">
+          <div class="dado-display">
+            <div class="dado-face" id="dado-face">
+              <i class="fas fa-dice"></i>
+            </div>
+            <div class="dado-valor" id="dado-valor">?</div>
+          </div>
+          
+          <button onclick="rolarDado()" class="btn-dado" id="btn-rolar-dado">
+            <i class="fas fa-dice-d20"></i> Rolar Dado
+          </button>
+          
+          <div class="dado-resultado" id="dado-resultado">
+            Aguardando jogada...
+          </div>
+        </div>
+        
+        <!-- INFORMAÇÕES DOS JOGADORES -->
+        <div class="lista-jogadores" id="lista-jogadores">
+          <h3><i class="fas fa-list-ol"></i> Jogadores:</h3>
+          <!-- Lista será preenchida pelo JavaScript -->
+        </div>
+        
+        <!-- BOTÕES DE AÇÃO -->
+        <div class="acoes-sidebar">
+          <button onclick="mostrarRegras()" class="btn-acao">
+            <i class="fas fa-book"></i> Regras
+          </button>
+          <button onclick="voltarMenu()" class="btn-sair">
+            <i class="fas fa-home"></i> Voltar ao Menu
+          </button>
+        </div>
+      </div>
+      
+      <!-- CONTEÚDO PRINCIPAL COM TABULEIRO -->
+      <div class="conteudo-principal">
+
+        
+        <!-- TABULEIRO EM SI -->
+        <div class="tabuleiro-container">
+          <div id="tabuleiro-grid">
+            <!-- Linha 1 -->
+            <div class="casa inicio" data-index="0" title="Início">
+              <div class="conteudo-casa">
+                <span class="icone"><i class="fas fa-flag-checkered"></i></span>
+                <span class="texto">Início</span>
+              </div>
+            </div>
+
+            <div class="casa normal" data-index="1">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            <div class="casa normal" data-index="2">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+           
+            <!-- <div class="casa vazia"></div> -->
+            <div class="casa pergunta" data-index="3">
+                <i class="fas fa-question"></i>
+            </div>
+
+            <div class="casa normal" data-index="4">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            <div class="casa especial" data-index="5">
+                <i class="fas fa-bolt"></i>
+            </div>
+
+            <div class="casa normal" data-index="6"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa normal" data-index="7"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa voltar" data-index="8" data-voltar="2"><i class="fas fa-bomb"></i></div>
+            <div class="casa normal" data-index="9"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa especial" data-index="10"><i class="fas fa-bolt"></i></div>
+            <div class="casa normal" data-index="11"><i class="fas fa-arrow-down"></i></div>
+
+            <!-- Linha 3 -->
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa normal" data-index="12"><i class="fas fa-arrow-down"></i></div>
+            
+            <div class="casa pergunta" data-index="24"><i class="fas fa-question"></i></div>
+            <div class="casa pergunta" data-index="23"><i class="fas fa-question"></i></div>
+            <div class="casa voltar" data-index="22" data-voltar="1"><i class="fas fa-bomb"></i></div>
+            <div class="casa normal" data-index="21"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa pergunta" data-index="20"><i class="fas fa-question"></i></div>
+
+            <!-- Linha 4 -->
+            <div class="casa normal" data-index="19"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa normal" data-index="18"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa normal" data-index="17"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa voltar" data-index="16" data-voltar="3"><i class="fas fa-bomb"></i></div>
+            <div class="casa normal" data-index="15"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa pergunta" data-index="14"><i class="fas fa-question"></i></div>
+
+            <!-- Linha 5 -->
+            <div class="casa normal" data-index="13"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa especial" data-index="25"><i class="fas fa-bolt"></i></div>
+            
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa normal" data-index="26"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa pergunta" data-index="27"><i class="fas fa-question"></i></div>
+            <div class="casa normal" data-index="28"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa normal" data-index="29"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa normal" data-index="30"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa normal" data-index="31"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa voltar" data-index="32" data-voltar="1"><i class="fas fa-bomb"></i></div>
+            <div class="casa normal" data-index="33"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa normal" data-index="34"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa pergunta" data-index="35"><i class="fas fa-question"></i></div>
+            <div class="casa normal" data-index="36"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa normal" data-index="37"><i class="fas fa-arrow-down"></i></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa vazia"></div>
+            <div class="casa especial" data-index="38"><i class="fas fa-bolt"></i></div>
+            
+            <div class="casa fim" data-index="50" title="Fim">
+              <div class="conteudo-casa">
+                <span class="icone"><i class="fas fa-trophy"></i></span>
+                <span class="texto">Fim</span>
+              </div>
+            </div>
+            <div class="casa normal" data-index="49"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa pergunta" data-index="48"><i class="fas fa-question"></i></div>
+            <div class="casa normal" data-index="47"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa voltar" data-index="46" data-voltar="3"><i class="fas fa-bomb"></i></div>
+            <div class="casa normal" data-index="45"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa normal" data-index="44"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa especial" data-index="43"><i class="fas fa-bolt"></i></div>
+            <div class="casa normal" data-index="42"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa pergunta" data-index="41"><i class="fas fa-question"></i></div>
+            <div class="casa normal" data-index="40"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa normal" data-index="39"><i class="fas fa-arrow-left"></i></div>
+            
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- MODAL VITÓRIA -->
+  <div id="modal-vitoria" class="modal">
+    <div class="modal-box vitoria">
+      <h1>🏆 VITÓRIA!</h1>
+      <div class="vencedor-animado">
+        <i class="fas fa-crown"></i>
+      </div>
+      <p id="nome-vencedor"></p>
+      <button onclick="voltarMenu()">
+        <i class="fas fa-home"></i> Voltar ao menu
+      </button>
+    </div>
+  </div>
+  
+  <!-- MODAL REGRAS -->
+  <div id="modal-regras" class="modal">
+    <div class="modal-box">
+      <h2><i class="fas fa-book"></i> Regras do Jogo</h2>
+      <div class="regras-content">
+        <div class="regra-item">
+          <i class="fas fa-dice"></i>
+          <h3>Objetivo</h3>
+          <p>Seja o primeiro jogador a chegar à casa final (🏁).</p>
+        </div>
+        <div class="regra-item">
+          <i class="fas fa-question-circle"></i>
+          <h3>Casas de Pergunta</h3>
+          <p>Responda corretamente para avançar ou volte se errar.</p>
+        </div>
+        <div class="regra-item">
+          <i class="fas fa-star"></i>
+          <h3>Casas Especiais</h3>
+          <p>Eventos aleatórios que podem ajudar ou atrapalhar!</p>
+        </div>
+        <div class="regra-item">
+          <i class="fas fa-users"></i>
+          <h3>Turnos</h3>
+          <p>Os jogadores jogam em ordem definida no início.</p>
+        </div>
+      </div>
+      <button onclick="fecharModal('modal-regras')" class="voltar">
+        <i class="fas fa-check"></i> Entendi
+      </button>
+    </div>
+  </div>
+  <!-- MODAL PERGUNTA -->
+<div id="modal-pergunta" class="modal">
+  <div class="modal-box pergunta">
+    <div class="pergunta-header">
+      <h2><i class="fas fa-question-circle"></i> Desafio de Isomeria</h2>
+      <p id="pergunta-jogador-nome"></p>
+    </div>
+    
+    <div class="pergunta-conteudo">
+      <h3 id="texto-pergunta"></h3>
+      
+      <div class="opcoes-pergunta" id="opcoes-pergunta">
+        <!-- Opções serão preenchidas por JavaScript -->
+      </div>
+      
+      <div class="pergunta-rodape">
+        <button onclick="responderPergunta(1)" class="btn-opcao" data-opcao="1">
+          <span class="opcao-num">1</span>
+          <span class="opcao-texto" id="opcao1-texto"></span>
+        </button>
+        <button onclick="responderPergunta(2)" class="btn-opcao" data-opcao="2">
+          <span class="opcao-num">2</span>
+          <span class="opcao-texto" id="opcao2-texto"></span>
+        </button>
+        <button onclick="responderPergunta(3)" class="btn-opcao" data-opcao="3">
+          <span class="opcao-num">3</span>
+          <span class="opcao-texto" id="opcao3-texto"></span>
+        </button>
+        <button onclick="responderPergunta(4)" class="btn-opcao" data-opcao="4">
+          <span class="opcao-num">4</span>
+          <span class="opcao-texto" id="opcao4-texto"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="popup-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+
+<div id="popup-confirm" class="popup-confirm" style="display:none;">
+    <div class="popup-confirm-box">
+        <p id="popup-confirm-text"></p>
+        <div class="popup-confirm-buttons">
+            <button id="popup-confirm-sim">Confirmar</button>
+            <button id="popup-confirm-nao">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
