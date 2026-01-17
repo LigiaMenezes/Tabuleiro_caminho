@@ -864,6 +864,19 @@ option{
     font-size: 1.2rem;
     color: #fff;
 }
+.pergunta-imagem {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pergunta-imagem img {
+    max-width: 90%;
+    max-height: 260px;
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
 /* Estilo do fundo do modal */
 .modal {
   display: none; /* inicialmente escondido */
@@ -1055,13 +1068,3 @@ option{
     box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
 }
 
-#popup-confirm-nao {
-    background: linear-gradient(135deg, #f44336 0%, #b71c1c 100%);
-    color: white;
-}
-
-#popup-confirm-nao:hover {
-    background: linear-gradient(135deg, #ef5350 0%, #d32f2f 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(244, 67, 54, 0.3);
-}

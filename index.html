@@ -143,9 +143,10 @@
             <div class="casa normal" data-index="6"><i class="fas fa-arrow-right"></i></div>
             <div class="casa normal" data-index="7"><i class="fas fa-arrow-right"></i></div>
             <div class="casa voltar" data-index="8" data-voltar="2"><i class="fas fa-bomb"></i></div>
-            <div class="casa normal" data-index="9"><i class="fas fa-arrow-right"></i></div>
-            <div class="casa especial" data-index="10"><i class="fas fa-bolt"></i></div>
-            <div class="casa normal" data-index="11"><i class="fas fa-arrow-down"></i></div>
+            <div class="casa especial" data-index="9"><i class="fas fa-bolt"></i></div>
+
+            <div class="casa pergunta" data-index="10"><i class="fas fa-question"></i></div>
+                        <div class="casa voltar" data-index="11" data-voltar="1"><i class="fas fa-bomb"></i></div>
 
             <!-- Linha 3 -->
             <div class="casa vazia"></div>
@@ -159,7 +160,7 @@
             <div class="casa vazia"></div>
             <div class="casa vazia"></div>
             <div class="casa vazia"></div>
-            <div class="casa normal" data-index="12"><i class="fas fa-arrow-down"></i></div>
+            <div class="casa pergunta" data-index="12"><i class="fas fa-question"></i></div>
             
             <div class="casa pergunta" data-index="24"><i class="fas fa-question"></i></div>
             <div class="casa pergunta" data-index="23"><i class="fas fa-question"></i></div>
@@ -167,15 +168,13 @@
             <div class="casa normal" data-index="21"><i class="fas fa-arrow-left"></i></div>
             <div class="casa pergunta" data-index="20"><i class="fas fa-question"></i></div>
 
-            <!-- Linha 4 -->
             <div class="casa normal" data-index="19"><i class="fas fa-arrow-left"></i></div>
-            <div class="casa normal" data-index="18"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa pergunta" data-index="18"><i class="fas fa-question"></i></div>
             <div class="casa normal" data-index="17"><i class="fas fa-arrow-left"></i></div>
             <div class="casa voltar" data-index="16" data-voltar="3"><i class="fas fa-bomb"></i></div>
             <div class="casa normal" data-index="15"><i class="fas fa-arrow-left"></i></div>
             <div class="casa pergunta" data-index="14"><i class="fas fa-question"></i></div>
 
-            <!-- Linha 5 -->
             <div class="casa normal" data-index="13"><i class="fas fa-arrow-left"></i></div>
             <div class="casa especial" data-index="25"><i class="fas fa-bolt"></i></div>
             
@@ -195,8 +194,7 @@
             <div class="casa normal" data-index="26"><i class="fas fa-arrow-right"></i></div>
             <div class="casa pergunta" data-index="27"><i class="fas fa-question"></i></div>
             <div class="casa normal" data-index="28"><i class="fas fa-arrow-right"></i></div>
-            <div class="casa normal" data-index="29"><i class="fas fa-arrow-right"></i></div>
-            <div class="casa normal" data-index="30"><i class="fas fa-arrow-right"></i></div>
+            <div class="casa pergunta" data-index="29"><i class="fas fa-question"></i></div>            <div class="casa pergunta" data-index="30"><i class="fas fa-question"></i></div>
             <div class="casa normal" data-index="31"><i class="fas fa-arrow-right"></i></div>
             <div class="casa voltar" data-index="32" data-voltar="1"><i class="fas fa-bomb"></i></div>
             <div class="casa normal" data-index="33"><i class="fas fa-arrow-right"></i></div>
@@ -223,17 +221,19 @@
                 <span class="texto">Fim</span>
               </div>
             </div>
-            <div class="casa normal" data-index="49"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa especial" data-index="49"><i class="fas fa-bolt"></i></div>
+
             <div class="casa pergunta" data-index="48"><i class="fas fa-question"></i></div>
             <div class="casa normal" data-index="47"><i class="fas fa-arrow-left"></i></div>
-            <div class="casa voltar" data-index="46" data-voltar="3"><i class="fas fa-bomb"></i></div>
+            <div class="casa voltar" data-index="46" data-voltar="5"><i class="fas fa-bomb"></i></div>
             <div class="casa normal" data-index="45"><i class="fas fa-arrow-left"></i></div>
             <div class="casa normal" data-index="44"><i class="fas fa-arrow-left"></i></div>
-            <div class="casa especial" data-index="43"><i class="fas fa-bolt"></i></div>
-            <div class="casa normal" data-index="42"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa pergunta" data-index="43"><i class="fas fa-question"></i></div>
+            <div class="casa especial" data-index="42"><i class="fas fa-bolt"></i></div>
+
             <div class="casa pergunta" data-index="41"><i class="fas fa-question"></i></div>
             <div class="casa normal" data-index="40"><i class="fas fa-arrow-left"></i></div>
-            <div class="casa normal" data-index="39"><i class="fas fa-arrow-left"></i></div>
+            <div class="casa voltar" data-index="39" data-voltar="4"><i class="fas fa-bomb"></i></div>
             
           </div>
         </div>
@@ -299,7 +299,7 @@
     
     <div class="pergunta-conteudo">
       <h3 id="texto-pergunta"></h3>
-      
+      <div class="pergunta-imagem" id="pergunta-imagem"></div>
       <div class="opcoes-pergunta" id="opcoes-pergunta">
         <!-- Opções serão preenchidas por JavaScript -->
       </div>
@@ -333,7 +333,7 @@
         <p id="popup-confirm-text"></p>
         <div class="popup-confirm-buttons">
             <button id="popup-confirm-sim">Confirmar</button>
-            <button id="popup-confirm-nao">Cancelar</button>
+
         </div>
     </div>
 </div>

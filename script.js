@@ -344,93 +344,126 @@ function verificarCasaAtual(jogador, posicao) {
 
 let perguntaAtual = null;
 let jogadorPerguntaAtual = null;
-
 function fazerPergunta(jogador) {
     jogadorPerguntaAtual = jogador;
-    
+
     const perguntas = [
         {
+            id: 0,
+            imagem: "imagens/1.png",
             pergunta: "Qual tipo de isomeria ocorre quando dois compostos têm mesma fórmula molecular, mas diferentes arranjos espaciais?",
             opcoes: ["Isomeria de função", "Isomeria espacial", "Isomeria de posição", "Isomeria de cadeia"],
             correta: 2
         },
         {
+            id: 1,   
             pergunta: "Qual tipo de isomeria é observada em compostos com mesma fórmula, mas diferentes ligações funcionais?",
             opcoes: ["Isomeria de cadeia", "Isomeria de função", "Isomeria geométrica", "Isomeria óptica"],
             correta: 2
         },
         {
+            id: 2,
             pergunta: "Em que tipo de isomeria os átomos estão ligados na mesma sequência, mas o arranjo espacial difere?",
             opcoes: ["Isomeria de posição", "Isomeria de função", "Isomeria espacial", "Isomeria de cadeia"],
             correta: 3
         },
         {
+            id: 3,
             pergunta: "Quando ocorre isomeria óptica?",
             opcoes: ["Quando o composto possui carbono quiral", "Quando há cadeia aberta", "Quando há insaturação", "Quando há heteroátomos"],
             correta: 1
         },
         {
+            id: 4,
+            imagem: "imagens/1.png",
             pergunta: "Qual tipo de isomeria muda a posição do grupo funcional na molécula?",
             opcoes: ["Isomeria de função", "Isomeria de posição", "Isomeria de cadeia", "Isomeria óptica"],
             correta: 2
         },
         {
+            id: 5,
             pergunta: "O que caracteriza a isomeria de cadeia?",
             opcoes: ["Diferentes grupos funcionais", "Diferentes tipos de cadeia carbônica", "Diferentes arranjos espaciais", "Presença de carbono quiral"],
             correta: 2
         },
         {
+            id: 6,
             pergunta: "Qual é um exemplo clássico de isomeria geométrica (cis-trans)?",
             opcoes: ["Butano e metilpropano", "Etanol e metoximetano", "cis-2-buteno e trans-2-buteno", "Glicose e frutose"],
             correta: 3
         },
         {
+            id: 7,
             pergunta: "O que é um carbono quiral?",
             opcoes: ["Carbono com quatro ligantes diferentes", "Carbono em uma cadeia ramificada", "Carbono com dupla ligação", "Carbono ligado a oxigênio"],
             correta: 1
         },
         {
+            id: 8,
             pergunta: "Qual tipo de isomeria é também conhecida como estereoisomeria?",
             opcoes: ["Isomeria de posição", "Isomeria de função", "Isomeria espacial", "Isomeria de cadeia"],
             correta: 3
         },
         {
+            id: 9,
             pergunta: "O que são enantiômeros?",
-            opcoes: ["Isômeros com diferentes grupos funcionais", "Isômeros ópticos que são imagens especulares não sobreponíveis", "Isômeros com cadeias diferentes", "Isômeros de posição"],
+            opcoes: [
+                "Isômeros com diferentes grupos funcionais",
+                "Isômeros ópticos que são imagens especulares não sobreponíveis",
+                "Isômeros com cadeias diferentes",
+                "Isômeros de posição"
+            ],
             correta: 2
         }
     ];
     
-    // SISTEMA PARA EVITAR REPETIÇÃO DE QUESTÕES
+
+    // SISTEMA PARA EVITAR REPETIÇÃO
     if (!jogador.perguntasRespondidas) {
         jogador.perguntasRespondidas = [];
     }
-    
-    let perguntasDisponiveis = perguntas.filter((_, index) => !jogador.perguntasRespondidas.includes(index));
-    
+
+    let perguntasDisponiveis = perguntas.filter(
+        p => !jogador.perguntasRespondidas.includes(p.id)
+    );
+
     if (perguntasDisponiveis.length === 0) {
         jogador.perguntasRespondidas = [];
         perguntasDisponiveis = perguntas;
     }
-    
-    const pergunta = perguntasDisponiveis[Math.floor(Math.random() * perguntasDisponiveis.length)];
-    const perguntaIndex = perguntas.findIndex(p => p.pergunta === pergunta.pergunta);
-    jogador.perguntasRespondidas.push(perguntaIndex);
-    
+
+    const pergunta = perguntasDisponiveis[
+        Math.floor(Math.random() * perguntasDisponiveis.length)
+    ];
+
+
+    jogador.perguntasRespondidas.push(pergunta.id);
+
+
     perguntaAtual = pergunta;
-    
-    // Configurar modal de pergunta
-    document.getElementById('pergunta-jogador-nome').textContent = `Desafio para: ${jogador.nome}`;
+
+    // 🔥 CONFIGURAR TEXTO
+    document.getElementById('pergunta-jogador-nome').textContent =
+        `Desafio para: ${jogador.nome}`;
     document.getElementById('texto-pergunta').textContent = pergunta.pergunta;
-    
-    // Configurar opções (removendo números iniciais)
-    for (let i = 0; i < pergunta.opcoes.length; i++) {
-        const opcaoTexto = pergunta.opcoes[i];
-        // Remove o número inicial se existir (ex: "1) Isomeria de função" → "Isomeria de função")
-        const textoLimpo = opcaoTexto.replace(/^\d+\)\s*/, '');
-        document.getElementById(`opcao${i+1}-texto`).textContent = textoLimpo;
+
+    // 🔥 CONFIGURAR IMAGEM (AGORA NO LUGAR CERTO)
+    const divImagem = document.getElementById('pergunta-imagem');
+
+    if (pergunta.imagem) {
+        divImagem.innerHTML = `<img src="${pergunta.imagem}" alt="Imagem da pergunta">`;
+        divImagem.style.display = 'block';
+    } else {
+        divImagem.innerHTML = '';
+        divImagem.style.display = 'none';
     }
-    
+
+    // 🔥 CONFIGURAR OPÇÕES
+    for (let i = 0; i < pergunta.opcoes.length; i++) {
+        document.getElementById(`opcao${i + 1}-texto`).textContent =
+            pergunta.opcoes[i];
+    }
+
     // Mostrar modal
     document.getElementById('modal-pergunta').style.display = 'flex';
 }
@@ -652,7 +685,7 @@ function mostrarConfirmacao(mensagem) {
         const popup = document.getElementById('popup-confirm');
         const texto = document.getElementById('popup-confirm-text');
         const btnSim = document.getElementById('popup-confirm-sim');
-        const btnNao = document.getElementById('popup-confirm-nao');
+
 
         texto.textContent = mensagem;
         popup.style.display = 'flex';
@@ -660,13 +693,13 @@ function mostrarConfirmacao(mensagem) {
         function limpar() {
             popup.style.display = 'none';
             btnSim.removeEventListener('click', simHandler);
-            btnNao.removeEventListener('click', naoHandler);
+
         }
 
         function simHandler() { limpar(); resolve(true); }
-        function naoHandler() { limpar(); resolve(false); }
+
 
         btnSim.addEventListener('click', simHandler);
-        btnNao.addEventListener('click', naoHandler);
+
     });
 }
