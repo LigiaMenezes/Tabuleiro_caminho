@@ -6,6 +6,92 @@ let jogadorAtual = 0;
 let posicoesJogadores = {};
 let jogoIniciado = false;
 
+    const perguntas = [
+        {
+            id: 0,
+            pergunta: "Qual tipo de isomeria ocorre quando dois compostos têm mesma fórmula molecular, mas diferentes arranjos espaciais?",
+            opcoes: ["Isomeria de função", "Isomeria espacial", "Isomeria de posição", "Isomeria de cadeia"],
+            correta: 2
+        },
+        {
+            id: 1,   
+            pergunta: "Qual tipo de isomeria é observada em compostos com mesma fórmula, mas diferentes ligações funcionais?",
+            opcoes: ["Isomeria de cadeia", "Isomeria de função", "Isomeria geométrica", "Isomeria óptica"],
+            correta: 2
+        },
+        {
+            id: 2,
+            pergunta: "Em que tipo de isomeria os átomos estão ligados na mesma sequência, mas o arranjo espacial difere?",
+            opcoes: ["Isomeria de posição", "Isomeria de função", "Isomeria espacial", "Isomeria de cadeia"],
+            correta: 3
+        },
+        {
+            id: 3,
+            pergunta: "Quando ocorre isomeria óptica?",
+            opcoes: ["Quando o composto possui carbono quiral", "Quando há cadeia aberta", "Quando há insaturação", "Quando há heteroátomos"],
+            correta: 1
+        },
+        {
+            id: 4,
+            // imagem: "imagens/1.png",
+            pergunta: "Qual tipo de isomeria muda a posição do grupo funcional na molécula?",
+            opcoes: ["Isomeria de função", "Isomeria de posição", "Isomeria de cadeia", "Isomeria óptica"],
+            correta: 2
+        },
+        {
+            id: 5,
+            pergunta: "O que caracteriza a isomeria de cadeia?",
+            opcoes: ["Diferentes grupos funcionais", "Diferentes tipos de cadeia carbônica", "Diferentes arranjos espaciais", "Presença de carbono quiral"],
+            correta: 2
+        },
+        {
+            id: 6,
+            pergunta: "Qual é um exemplo clássico de isomeria geométrica (cis-trans)?",
+            opcoes: ["Butano e metilpropano", "Etanol e metoximetano", "cis-2-buteno e trans-2-buteno", "Glicose e frutose"],
+            correta: 3
+        },
+        {
+            id: 7,
+            pergunta: "O que é um carbono quiral?",
+            opcoes: ["Carbono com quatro ligantes diferentes", "Carbono em uma cadeia ramificada", "Carbono com dupla ligação", "Carbono ligado a oxigênio"],
+            correta: 1
+        },
+        {
+            id: 8,
+            pergunta: "Qual tipo de isomeria é também conhecida como estereoisomeria?",
+            opcoes: ["Isomeria de posição", "Isomeria de função", "Isomeria espacial", "Isomeria de cadeia"],
+            correta: 3
+        },
+        {
+            id: 9,
+            pergunta: "O que são enantiômeros?",
+            opcoes: [
+                "Isômeros com diferentes grupos funcionais",
+                "Isômeros ópticos que são imagens especulares não sobreponíveis",
+                "Isômeros com cadeias diferentes",
+                "Isômeros de posição"
+            ],
+            correta: 2
+        },
+        { id: 10, pergunta: "São isômeros de função da pentan-2-ona:", opcoes: [ "O pentanal e a pentan-3-ona", "O dimetilpropanal e a pentan-3-ona", "O pentanal e a dimetilpropanol", "O dimetilpropanal e o ciclopentanol" ], correta: 4 },
+        { id: 11, pergunta: "Qual hidrocarboneto abaixo apresenta isomeria espacial geométrica?", opcoes: [ "Pentano", "Pent-1-eno", "Pent-2-eno", "Pent-1-ino" ], correta: 3 },
+        { id: 12, pergunta: "Quais moléculas são isômeros de cadeia do pent-1-eno?", opcoes: [ "O ciclopentano e o cis-pent-2-eno", "O metilciclobutano e o trans-pent-2-eno", "O ciclopentano e o 3-metilbut-1-eno", "O metilciclopentano e o cis-pent-2-eno" ], correta: 3 },
+        { id: 13, pergunta: "O número de isômeros planos com fórmula C₆H₁₄ é igual a:", opcoes: [ "3", "4", "5", "6" ], correta: 3 },
+        { id: 14, pergunta: "O número de isômeros planos com fórmula C₄H₁₀O é igual a:", opcoes: [ "2", "3", "5", "7" ], correta: 4 },
+        { id: 15, pergunta: "Identifique a alternativa em que os compostos não são isômeros:", opcoes: [ "propan-1-ol e propan-2-ol", "propanal e propanona", "but-1-eno e but-2-eno", "propano e propeno" ], correta: 4 },
+        { id: 16, pergunta: "Têm a mesma fórmula molecular C₅H₁₀:", opcoes: [ "n-pentano e metilciclobutano", "pent-1-eno e ciclopentano", "pent-2-ino e ciclopenteno", "2-metilbutano e dimetilciclopropano" ], correta: 2 },
+        { id: 17, pergunta: "Qual tipo de isomeria ocorre entre butan-1-ol e éter etílico?", opcoes: [ "Isomeria de cadeia", "Isomeria de posição", "Isomeria de função", "Isomeria geométrica" ], correta: 3 },
+        { id: 18, pergunta: "Qual dos compostos listados a seguir apresenta isomeria geométrica?", opcoes: [ "But-2-enonitrilo", "Pent-2-ino", "2,3-dimetil-hexano", "But-1-eno" ], correta: 1 },
+        { id: 19, pergunta: "A propanona e o isopropenol exemplificam um caso de isomeria:", opcoes: [ "de cadeia", "de metameria", "de função", "de tautomeria" ], correta: 4 },
+        { id: 20, pergunta: "Butanal e metilpropanal são isômeros de:", opcoes: [ "função", "cadeia", "compensação", "posição" ], correta: 2 },
+        { id: 21, pergunta: "Qual a afirmação errada a respeito do butan-1-ol e do butan-2-ol?", opcoes: [ "Têm a mesma fórmula mínima", "São isômeros de posição", "São álcoois saturados", "São isômeros de cadeia" ], correta: 4 },
+        { id: 22, pergunta: "Analise os compostos a seguir e assinale os pares de isômeros:\n1) CH₃COCH₃\n2) CH₃COOCH₃\n3) CH₃CH₂CHO\n4) CH₃CH₂COOH\n5) CH₃CH₂CH₂OH\n6) CH₃OCH₂CH₃", opcoes: [ "1 e 5; 2 e 4", "2 e 4; 3 e 5", "1 e 3; 2 e 4", "3 e 6; 1 e 5" ], correta: 3 },
+        { id: 23, pergunta: "Os compostos abaixo exemplificam um caso de isomeria de:", imagem: "imagens/89q.jpeg", opcoes: [ "Cadeia", "Função", "Compensação", "Posição" ], correta: 2 },
+        { id: 24, imagem: "imagens/100q.jpeg", pergunta: "O equilíbrio abaixo poderá ser considerado como:", opcoes: [ "Ressonância", "Reação ácido-base", "Reação de oxi-redução", "Tautomeria" ], correta: 4 },
+        { id: 25, imagem: "imagens/99q.jpeg", pergunta: "Os tipos de isomeria existentes entre os compostos abaixo são, respectivamente:", opcoes: [ "Posição e cadeia", "Tautomeria e compensação", "Função e compensação", "tautomeria e função" ], correta: 4 },
+
+    ];
+
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
     criarInputs();
@@ -75,8 +161,11 @@ function iniciarJogo() {
             nome: nome,
             cor: obterCorJogador(i),
             posicao: 0,
-            icone: ['👤', '👨', '👩', '🧑'][i-1] || '👤'
+            icone: ['👤', '👨', '👩', '🧑'][i-1] || '👤',
+            perguntasRestantes: embaralhar([...perguntas])
+
         });
+
     }
     
     if (jogadores.length < 2) {
@@ -113,6 +202,15 @@ function obterCorJogador(numero) {
     ];
     return cores[numero - 1] || '#9C27B0';
 }
+
+function embaralhar(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 
 // Configuração do Jogo
 function configurarInterfaceJogo() {
@@ -347,453 +445,29 @@ let jogadorPerguntaAtual = null;
 function fazerPergunta(jogador) {
     jogadorPerguntaAtual = jogador;
 
-    const perguntas = [
-        {
-            id: 0,
-            pergunta: "Qual tipo de isomeria ocorre quando dois compostos têm mesma fórmula molecular, mas diferentes arranjos espaciais?",
-            opcoes: ["Isomeria de função", "Isomeria espacial", "Isomeria de posição", "Isomeria de cadeia"],
-            correta: 1
-        },
-        {
-            id: 1,   
-            pergunta: "Qual tipo de isomeria é observada em compostos com mesma fórmula, mas diferentes ligações funcionais?",
-            opcoes: ["Isomeria de cadeia", "Isomeria de função", "Isomeria geométrica", "Isomeria óptica"],
-            correta: 1
-        },
-        {
-            id: 2,
-            pergunta: "Em que tipo de isomeria os átomos estão ligados na mesma sequência, mas o arranjo espacial difere?",
-            opcoes: ["Isomeria de posição", "Isomeria de função", "Isomeria espacial", "Isomeria de cadeia"],
-            correta: 2
-        },
-        {
-            id: 3,
-            pergunta: "Quando ocorre isomeria óptica?",
-            opcoes: ["Quando o composto possui carbono quiral", "Quando há cadeia aberta", "Quando há insaturação", "Quando há heteroátomos"],
-            correta: 0
-        },
-        {
-            id: 4,
-            imagem: "imagens/1.png",
-            pergunta: "Qual tipo de isomeria muda a posição do grupo funcional na molécula?",
-            opcoes: ["Isomeria de função", "Isomeria de posição", "Isomeria de cadeia", "Isomeria óptica"],
-            correta: 1
-        },
-        {
-            id: 5,
-            pergunta: "O que caracteriza a isomeria de cadeia?",
-            opcoes: ["Diferentes grupos funcionais", "Diferentes tipos de cadeia carbônica", "Diferentes arranjos espaciais", "Presença de carbono quiral"],
-            correta: 1
-        },
-        {
-            id: 6,
-            pergunta: "Qual é um exemplo clássico de isomeria geométrica (cis-trans)?",
-            opcoes: ["Butano e metilpropano", "Etanol e metoximetano", "cis-2-buteno e trans-2-buteno", "Glicose e frutose"],
-            correta: 2
-        },
-        {
-            id: 7,
-            pergunta: "O que é um carbono quiral?",
-            opcoes: ["Carbono com quatro ligantes diferentes", "Carbono em uma cadeia ramificada", "Carbono com dupla ligação", "Carbono ligado a oxigênio"],
-            correta: 0
-        },
-        {
-            id: 8,
-            pergunta: "Qual tipo de isomeria é também conhecida como estereoisomeria?",
-            opcoes: ["Isomeria de posição", "Isomeria de função", "Isomeria espacial", "Isomeria de cadeia"],
-            correta: 2
-        },
-                
-        {
-            id: 9,
-            pergunta: "Qual hidrocarboneto abaixo apresenta isomeria espacial geométrica?",
-            opcoes: [
-            "Pentano",
-            "Pent-1-eno",
-            "Pent-2-eno",
-            "Pent-1-ino",
-            "Pent-2-ino"
-            ],
-            correta: 1
-        },
-        {
-            id: 10,
-            pergunta: "São isômeros de função da pentan-2-ona:",
-            opcoes: [
-            "O pentanal e a pentan-3-ona",
-            "O dimetilpropanal e a pentan-3-ona",
-            "O pentanal e a dimetilpropanol",
-            "O dimetilpropanal e o ciclopentanol",
-            "O dimetilpropanol e o ciclopentanol"
-            ],
-            correta: 1
-        },
-        {
-            id: 11,
-            pergunta: "Quais moléculas são isômeros de cadeia do pent-1-eno?",
-            opcoes: [
-            "O ciclopentano e o cis-pent-2-eno",
-            "O metilciclobutano e o trans-pent-2-eno",
-            "O ciclopentano e o 3-metilbut-1-eno",
-            "O metilciclopentano e o cis-pent-2-eno",
-            "O trans-pent-2-eno e o 3-metilbut-1-eno"
-            ],
-            correta: 4
-        },
-        {
-            id: 12,
-            pergunta: "Apresenta isomeria espacial óptica:",
-            opcoes: [
-            "2-metilpentano",
-            "3-metilpentano",
-            "2-metilhexano",
-            "3-metilhexano",
-            "2-metilheptano"
-            ],
-            correta: 3
-        },
-        {
-            id: 13,
-            pergunta: "O número de isômeros planos com fórmula C₆H₁₄ é igual a:",
-            opcoes: [
-            "3",
-            "4",
-            "5",
-            "6",
-            "7"
-            ],
-            correta: 2
-        },
-        {
-            id: 14,
-            pergunta: "O número de isômeros planos com fórmula C₄H₁₀O é igual a:",
-            opcoes: [
-            "3",
-            "4",
-            "5",
-            "6",
-            "7"
-            ],
-            correta: 4
-        },
-        {
-            id: 15,
-            pergunta: "Considerando-se a posição dos grupos –CH₃ no anel aromático, o dimetilbenzeno possui:",
-            opcoes: [
-            "10 isômeros",
-            "6 isômeros",
-            "5 isômeros",
-            "3 isômeros",
-            "2 isômeros"
-            ],
-            correta: 3
-        },
-        {
-            id: 16,
-            pergunta: "Considere as afirmações sobre isomeria:",
-            opcoes: [
-            "Todas",
-            "Apenas I, II e III",
-            "Apenas I e II",
-            "Apenas II e IV",
-            "Apenas III e IV"
-            ],
-            correta: 0
-        },
-        {
-            id: 17,
-            pergunta: "Identifique a alternativa em que os compostos não são isômeros:",
-            opcoes: [
-            "but-1-eno e ciclobutano",
-            "propan-1-ol e propan-2-ol",
-            "propanal e propanona",
-            "but-1-eno e but-2-eno",
-            "propano e propeno"
-            ],
-            correta: 4
-        },
-        {
-            id: 18,
-            pergunta: "Têm a mesma fórmula molecular C₅H₁₀:",
-            opcoes: [
-            "n-pentano e metilciclobutano",
-            "pent-1-eno e ciclopentano",
-            "pent-2-ino e ciclopenteno",
-            "2-metilbutano e dimetilciclopropano",
-            "2,2-dimetilpropano e etilciclopropano"
-            ],
-            correta: 1
-        },
-        {
-            id: 19,
-            pergunta: "O número de éteres acíclicos diferentes possíveis para a fórmula C₄H₁₀O é:",
-            opcoes: [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
-            ],
-            correta: 2
-        },
-        {
-            id: 20,
-            pergunta: "Qual tipo de isomeria ocorre entre butan-1-ol e éter etílico?",
-            opcoes: [
-            "Isomeria de cadeia",
-            "Isomeria de posição",
-            "Isomeria de função",
-            "Isomeria geométrica",
-            "Isomeria óptica"
-            ],
-            correta: 2
-        },
-         {
-            id: 21,
-            pergunta: "Qual dos compostos listados a seguir apresenta isomeria geométrica?",
-            opcoes: [
-            "But-2-enonitrilo",
-            "Pent-2-ino",
-            "2,3-dimetil-hexano",
-            "But-1-eno",
-            "Ciclo-hepteno"
-            ],
-            correta: 0
-        },
-        {
-            id: 22,
-            pergunta: "Têm a mesma fórmula molecular C₅H₁₀:",
-            opcoes: [
-            "n-pentano e metilciclobutano",
-            "pent-1-eno e ciclopentano",
-            "pent-2-ino e ciclopenteno",
-            "2-metilbutano e dimetilciclopropano",
-            "2,2-dimetilpropano e etilciclopropano"
-            ],
-            correta: 1
-        },
-        {
-            id: 23,
-            pergunta: "A propanona e o isopropenol exemplificam um caso de isomeria:",
-            opcoes: [
-            "de cadeia",
-            "de metameria",
-            "de função",
-            "de tautomeria",
-            "cis-trans"
-            ],
-            correta: 3
-        },
-        {
-            id: 24,
-            pergunta: "Tautomeria é um caso particular de isomeria de função no qual dois isômeros coexistem em equilíbrio. Qual par exemplifica esse caso?",
-            opcoes: [
-            "éter etílico e éter metilpropílico",
-            "ciclobutano e metil ciclobutano",
-            "propanona e prop-2-enol",
-            "éter metílico e álcool etílico",
-            "dietilamina e metilpropilamina"
-            ],
-            correta: 2
-        },
-        {
-            id: 25,
-            pergunta: "Butanal e metilpropanal são isômeros de:",
-            opcoes: [
-            "função",
-            "cadeia",
-            "compensação",
-            "posição",
-            "tautomeria"
-            ],
-            correta: 1
-        },
-        {
-            id: 26,
-            pergunta: "Qual a afirmação errada a respeito do butan-1-ol e do butan-2-ol?",
-            opcoes: [
-            "Têm a mesma fórmula molecular",
-            "Têm a mesma fórmula mínima",
-            "São isômeros de posição",
-            "São álcoois saturados",
-            "São isômeros de cadeia"
-            ],
-            correta: 4
-        },
-        {
-            id: 27,
-            pergunta: "A alternativa que apresenta um par de isômeros planos é:",
-            opcoes: [
-            "pentanal e 2-metilbutan-1-ol",
-            "3-metilpentano e 2,3-dimetilbutano",
-            "1,2-dihidróxi-propano e ácido propanóico",
-            "trimetilamina e etil dimetilamina",
-            "metóxi-metano e etano"
-            ],
-            correta: 1
-        },
-        {
-            id: 28,
-            pergunta: "Analise os compostos a seguir e assinale os pares de isômeros:\n1) CH₃COCH₃\n2) CH₃COOCH₃\n3) CH₃CH₂CHO\n4) CH₃CH₂COOH\n5) CH₃CH₂CH₂OH\n6) CH₃OCH₂CH₃",
-            opcoes: [
-            "1 e 5; 2 e 4",
-            "2 e 4; 3 e 5",
-            "1 e 3; 2 e 4",
-            "3 e 6; 1 e 5",
-            "2 e 4; 3 e 6"
-            ],
-            correta: 2
-        },
-        {
-            id: 29,
-            pergunta: "A maior parte dos compostos presentes no petróleo consiste de hidrocarbonetos. Qual dos hidrocarbonetos abaixo admite isomeria de posição?",
-            opcoes: [
-            "Propino",
-            "Eteno",
-            "1,2-dimetilciclobutano",
-            "Metilpropano",
-            "Benzeno"
-            ],
-            correta: 2
-        },
-        {
-            id: 30,
-            pergunta: "Qual das opções abaixo apresenta um par de isômeros de cadeia?",
-            opcoes: [
-                "n-butano e isobutano",
-                "etanol e éter dimetílico",
-                "but-1-eno e but-2-eno",
-                "propanona e propanal"
-            ],
-            correta: 0
-        },
-        {
-            id: 31,
-            pergunta: "Qual das opções abaixo apresenta um par de isômeros de metameria?",
-            opcoes: [
-                "éter dimetílico e éter etilmetílico",
-                "etanol e éter dimetílico",
-                "propanona e propanal",
-                "n-butano e isobutano",
-                "but-1-eno e but-2-eno"
-            ],
-            correta: 0
-        },
-
-        {
-            id: 32,
-            pergunta: "A isomeria plana de isômeros de mesma função orgânica e com cadeia carbônica heterogênea denomina-se:",
-            opcoes: [
-            "isomeria de compensação",
-            "isomeria de posição",
-            "isomeria de função",
-            "isomeria de cadeia",
-            "tautomeria"
-            ],
-            correta: 0
-        },
-        {
-            id: 33,
-            pergunta: "Qual das opções abaixo apresenta um par de isômeros de metameria?",
-            opcoes: [
-                "éter etilmetílico e éter metilpropílico",
-                "etanol e éter dimetílico",
-                "propanona e propanal",
-                "n-butano e isobutano",
-                "but-1-eno e but-2-eno"
-            ],
-            correta: 0
-        },
-        {
-            id: 34,
-            
-            pergunta: "Os compostos abaixo exemplificam um caso de isomeria de:",
-            imagem: "imagens/89q.jpeg",
-            opcoes: [
-            "Cadeia",
-            "Função",
-            "Compensação",
-            "Posição",
-            "Metameria"
-            ],
-            correta: 1
-        },
-        {
-            id: 35,
-            imagem: "imagens/100q.jpeg",
-            pergunta: "O equilíbrio abaixo poderá ser considerado como:",
-            opcoes: [
-            "Ressonância",
-            "Reação ácido-base",
-            "Reação de oxi-redução",
-            "Tautomeria",
-            "hidrólise"
-            ],
-            correta: 3
-        },
-        {
-            id: 36,
-            imagem: "imagens/99q.jpeg",
-            pergunta: "Os tipos de isomeria existentes entre os compostos abaixo são, respectivamente:",
-            opcoes: [
-            "Posição e cadeia",
-            "Tautomeria e compensação",
-            "Função e compensação",
-            "tautomeria e função",
-            "cadeia e posição"
-            ],
-            correta: 3
-        }
-    ];
-    
-
-    // SISTEMA PARA EVITAR REPETIÇÃO
-    if (!jogador.perguntasRespondidas) {
-        jogador.perguntasRespondidas = [];
+    if (jogador.perguntasRestantes.length === 0) {
+        jogador.perguntasRestantes = embaralhar([...perguntas]);
     }
 
-    let perguntasDisponiveis = perguntas.filter(
-        p => !jogador.perguntasRespondidas.includes(p.id)
-    );
-
-    if (perguntasDisponiveis.length === 0) {
-        jogador.perguntasRespondidas = [];
-        perguntasDisponiveis = perguntas;
-    }
-
-    const pergunta = perguntasDisponiveis[
-        Math.floor(Math.random() * perguntasDisponiveis.length)
-    ];
-
-
-    jogador.perguntasRespondidas.push(pergunta.id);
-
-
+    const pergunta = jogador.perguntasRestantes.pop();
     perguntaAtual = pergunta;
 
-    // 🔥 CONFIGURAR TEXTO
     document.getElementById('pergunta-jogador-nome').textContent =
         `Desafio para: ${jogador.nome}`;
     document.getElementById('texto-pergunta').textContent = pergunta.pergunta;
 
-    // 🔥 CONFIGURAR IMAGEM (AGORA NO LUGAR CERTO)
     const divImagem = document.getElementById('pergunta-imagem');
-
     if (pergunta.imagem) {
-        divImagem.innerHTML = `<img src="${pergunta.imagem}" alt="Imagem da pergunta">`;
+        divImagem.innerHTML = `<img src="${pergunta.imagem}">`;
         divImagem.style.display = 'block';
     } else {
-        divImagem.innerHTML = '';
         divImagem.style.display = 'none';
     }
 
-    // 🔥 CONFIGURAR OPÇÕES
-    for (let i = 0; i < pergunta.opcoes.length; i++) {
-        document.getElementById(`opcao${i + 1}-texto`).textContent =
-            pergunta.opcoes[i];
-    }
+    pergunta.opcoes.forEach((opcao, i) => {
+        document.getElementById(`opcao${i + 1}-texto`).textContent = opcao;
+    });
 
-    // Mostrar modal
     document.getElementById('modal-pergunta').style.display = 'flex';
 }
 
