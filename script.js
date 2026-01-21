@@ -89,8 +89,20 @@ let jogoIniciado = false;
         { id: 23, pergunta: "Os compostos abaixo exemplificam um caso de isomeria de:", imagem: "imagens/89q.jpeg", opcoes: [ "Cadeia", "Função", "Compensação", "Posição" ], correta: 2 },
         { id: 24, imagem: "imagens/100q.jpeg", pergunta: "O equilíbrio abaixo poderá ser considerado como:", opcoes: [ "Ressonância", "Reação ácido-base", "Reação de oxi-redução", "Tautomeria" ], correta: 4 },
         { id: 25, imagem: "imagens/99q.jpeg", pergunta: "Os tipos de isomeria existentes entre os compostos abaixo são, respectivamente:", opcoes: [ "Posição e cadeia", "Tautomeria e compensação", "Função e compensação", "tautomeria e função" ], correta: 4 },
+        { id: 26, pergunta: "Qual dos compostos abaixo apresenta isomeria geométrica?", opcoes: [ "Hex-1-ino", "2-metil-propano", "Pent-2-eno", "Ciclopropano" ], correta: 3 },
+        { id: 27, pergunta: "(Isomeria de cadeia) Quais compostos abaixo são isômeros entre si?", opcoes: [ "Butano e but-1-eno", "Propano e ciclopropano", "Hexano e 2-metilpentano", "Etanol e metoximetano" ], correta: 3 },
+        { id: 28, pergunta: "(Isomeria de posição) Assinale o par que apresenta esse tipo de isomeria:", opcoes: [ "Propanona e propanal", "But-1-eno e but-2-eno", "Etanol e dimetiléter", "Ciclobutano e butano" ], correta: 2 },
+        { id: 29, pergunta: "(Isomeria de função) São isômeros funcionais: ", opcoes: [ "Etanol e eteno", "Ácido etanoico e etanal", "Propanol e metoxietano", "Propeno e propano" ], correta: 3 },
+        { id: 30, pergunta: "Qual composto pode apresentar isomeria óptica?", opcoes: [ "Etano", "2-bromopropano", "2-bromobutano ", "But-2-eno" ], correta: 3 },
+        { id: 31, pergunta: "Um carbono assimétrico está presente em:", opcoes: [ "Metano", "Etanol", "2-cloropropano", "2-clorobutano" ], correta: 4 },
+        { id: 32, pergunta: "(Isomeria E–Z) A notação E/Z é usada quando:", opcoes: [ "A cadeia é ramificada", "Há carbono assimétrico", "Existe dupla ligação com substituintes diferentes ", "O composto é aromático" ], correta: 3 },
+        { id: 33, pergunta: "Isomeria de posição acontece quando muda:", opcoes: [ "A função", "O número de carbonos", "A posição da ligação ou grupo", "A fórmula molecular" ], correta: 3 },
+        { id: 34, pergunta: "Qual destes NÃO apresenta isomeria?", opcoes: [ "Metano", "Butano", "Propeno", "Pentano" ], correta: 1 },
+        { id: 35, pergunta: "Isomeria óptica está ligada à presença de:", opcoes: [ " Dupla ligação", "Carbono assimétrico", "Cadeia ramificada", "Anel aromático" ], correta: 2 },
+        { id: 36, pergunta: "Propanona e propanal são isômeros de:", opcoes: [ "Cadeia", "Função", "Butano", "Geometria" ], correta: 2 },
 
     ];
+
 
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
